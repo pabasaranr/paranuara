@@ -101,7 +101,7 @@ class CitizenEP(ModelClass):
             return Response({'error': 'parameters not found'}, status=status.HTTP_204_NO_CONTENT)
 
 
-class TwoitizenEP(ModelClass):
+class TwoCitizenEP(ModelClass):
     """
     Provide functionality to the endpoint sending data related to two given citizens and brown eyed living friends
     common to them
