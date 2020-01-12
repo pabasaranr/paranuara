@@ -47,7 +47,8 @@ I assume that you have installed Python3.7 and MySQL already.
 ### Change paranuara/settings.py
 #### Open paranuara/settings.py through an editor
 #### As of now we have 
-``DATABASES = {
+```
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'paranuara',
@@ -62,10 +63,12 @@ I assume that you have installed Python3.7 and MySQL already.
         'USER': '',  # username
         'PASSWORD': '',  # password
     }
-}``
+    }
+```
 #### Change **USER** and **PASSWORD** field using your local instance user and password (in MySQL)
 #### After the changes it should look something like
-``DATABASES = {
+```
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'paranuara',
@@ -80,7 +83,8 @@ I assume that you have installed Python3.7 and MySQL already.
         'USER': 'root',
         'PASSWORD': '123',
     }
-}``
+}
+```
 
 ### Apply migrations 
 - `python manage.py makemigrations rest_api`
@@ -104,7 +108,7 @@ Add an authentication.
     - cURL : ```curl --location --request POST 'http://HOST:PORT/rest/save_company' --header 'Content-Type: application/json' --data-raw '<json_data>'```
 - ```POST``` ```rest/save_citizen```
     - To save citizen json data to database
-    - cURL : ```curl --location --request POST 'http://HOST:PORT/rest/save_citizen' --header 'Content-Type: application/json' --data-raw '<json_data>'
+    - cURL : ```curl --location --request POST 'http://HOST:PORT/rest/save_citizen' --header 'Content-Type: application/json' --data-raw '<json_data>'```
 - ```GET``` ```rest/company/<company_id>/employees```
     - To retrieve employee names in a given company
     - cURL : ```curl --location --request GET 'http://HOST:PORT/rest/company/<company_id>/employees'```
@@ -117,8 +121,8 @@ Add an authentication.
 
 ## Response Status summary
 
-200 - OK	Everything worked as expected.
-201 - Created    The request data saved to the database.
-204 - Received    Valid request with no data.
-400 - Bad Request	The request was unacceptable, often due to incalid parameters or request data.
-404 - Not Found	The requested resource doesn't exist.
+- 200 - OK	Everything worked as expected.
+- 201 - Created    The request data saved to the database.
+- 204 - Received    Valid request with no data.
+- 400 - Bad Request	The request was unacceptable, often due to incalid parameters or request data.
+- 404 - Not Found	The requested resource doesn't exist.
