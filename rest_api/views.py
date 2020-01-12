@@ -70,9 +70,8 @@ class CompanyEP(ModelClass):
     """
     model_serializer = ModComSerializer
 
-    def get(self, request, company_name):
-        company_details = self.db_get(ModelCompany, company=company_name)
-        employee_list = self.db_filter(ModelCitizen, company_id=company_details.index)
+    def get(self, request, company_id):
+        employee_list = self.db_filter(ModelCitizen, company_id=company_id)
         if employee_list:
             employee_data = CitizenNameResponseSerializer(employee_list, many=True).data
             return Response(employee_data, status=status.HTTP_200_OK)
