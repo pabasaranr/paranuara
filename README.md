@@ -97,4 +97,28 @@ I assume that you have installed Python3.7 and MySQL already.
 As for the given json, most of users have themself as their friends. I didn't consider that. I can be my own friend ;).
 Add an authentication.
 
+## How to use the API
+### This API has 5 endpoints, described below.
+- ```POST``` ```rest/save_company```
+    - To save company json data to database
+    - cURL : ```curl --location --request POST 'http://HOST:PORT/rest/save_company' --header 'Content-Type: application/json' --data-raw '<json_data>'```
+- ```POST``` ```rest/save_citizen```
+    - To save citizen json data to database
+    - cURL : ```curl --location --request POST 'http://HOST:PORT/rest/save_citizen' --header 'Content-Type: application/json' --data-raw '<json_data>'
+- ```GET``` ```rest/company/<company_id>/employees```
+    - To retrieve employee names in a given company
+    - cURL : ```curl --location --request GET 'http://HOST:PORT/rest/company/<company_id>/employees'```
+- ```GET``` ```rest/citizen```
+    - To retrieve *name, age, fruits, vegetables* of a given citizen
+    - cURL : ```curl --location --request GET 'http://HOST:PORT/rest/citizen?citizen_one=<citizen_id>'```
+- ```GET``` ```rest/common_friends```
+    - To retrieve *name, age, address, phone* values of given two citizens along with their *brown eyes, living, common* friends.
+    - cURL : ```curl --location --request GET 'http://HOST:PORT/rest/common_friends?citizen_one=<citizen_1_id>&citizen_two=<citizen_2_id>'```
 
+## Response Status summary
+
+200 - OK	Everything worked as expected.
+201 - Created    The request data saved to the database.
+204 - Received    Valid request with no data.
+400 - Bad Request	The request was unacceptable, often due to incalid parameters or request data.
+404 - Not Found	The requested resource doesn't exist.
