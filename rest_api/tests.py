@@ -223,20 +223,24 @@ class TwoCitizenGETAPITEST(APITestCase):
                                favouriteFood=["orange", "apple", "banana", "strawberry"])
 
     def test_brown_friends(self):
+        # a scenario with brown eyed living common friends
         response = client.get('https://127.0.0.1:8000/rest/common_friends', data={"citizen_one": 10, "citizen_two": 11})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['common_browneyed_living'], [{"name": "Molly Beasley"}])
 
     def test_citizens_not_available(self):
+        # citizen/s not found
         response = client.get('https://127.0.0.1:8000/rest/common_friends', data={"citizen_one": 100, "citizen_two": 12})
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_no_brown_friends(self):
+        # no common brown eyed living friends
         response = client.get('https://127.0.0.1:8000/rest/common_friends', data={"citizen_one": 10, "citizen_two": 12})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['common_browneyed_living'], [])
 
     def test_no_para(self):
+        # request without parameters or with wrong keys
         response = client.get('https://127.0.0.1:8000/rest/common_friends', data={"wrong_key": 17})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
