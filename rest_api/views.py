@@ -27,8 +27,7 @@ class ModelClass(APIView):
                 return Response({'status': 'Records added'}, status=status.HTTP_201_CREATED)
             except ValidationError as e:  # invalid data
                 return Response({'error': filter(None, e.detail)}, status=status.HTTP_409_CONFLICT)
-        else:
-            return Response({'status': 'Data not found'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'status': 'Data not found'}, status=status.HTTP_204_NO_CONTENT)
 
     @staticmethod
     def db_get(model, **kwargs):
@@ -77,8 +76,7 @@ class CompanyEP(ModelClass):
         if employee_list:
             employee_data = CitizenNameResponseSerializer(employee_list, many=True).data
             return Response(employee_data, status=status.HTTP_200_OK)
-        else:
-            return Response({'status': 'No employee records available'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'status': 'No employee records available'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class CitizenEP(ModelClass):
@@ -97,8 +95,7 @@ class CitizenEP(ModelClass):
             citizen_one = self.db_get(ModelCitizen, index=request.GET['citizen_one'])
             citizen_serializer = OneCitizenResponseSerializer(citizen_one)  # serialize citizen's data
             return Response(citizen_serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response({'error': 'parameters not found'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'error': 'parameters not found'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TwoCitizenEP(ModelClass):
@@ -125,6 +122,5 @@ class TwoCitizenEP(ModelClass):
                 brown_living_friends_serializer = CitizenNameResponseSerializer(brown_living_friends, many=True)
                 return Response({'citizens': citizen_serializer.data,
                                  'common_browneyed_living': brown_living_friends_serializer.data},
-                                status=status.HTTP_204_NO_CONTENT)
-        else:
-            return Response({'error': 'parameters not found'}, status=status.HTTP_204_NO_CONTENT)
+                                status=status.HTTP_200_OK)
+        return Response({'error': 'parameters not found'}, status=status.HTTP_400_BAD_REQUEST)
