@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'paranuara.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'paranuara',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'e[DE203@',
+        'NAME': '',
+        'HOST': '',
+        'USER': '',
+        'PASSWORD': '',
     }
 }
 
