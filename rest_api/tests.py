@@ -44,7 +44,7 @@ class CitizenPOSTAPITest(APITestCase):
              "favouriteFood": ["orange", "apple", "banana", "cucumber"]}]
         response = client.post('https://127.0.0.1:8000/rest/save_citizen', data=json.dumps(invalid_payload1),
                                content_type='application/json')
-        self.assertEqual(response.status_code, status.HTTP_409_CONFLICT)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_valid(self):
         # payload with data
@@ -91,17 +91,17 @@ class CompanyEmployeeGETAPITEST(APITestCase):
 
     def test_company_employee_unavailable(self):
         # company without employees
-        response = client.get('https://127.0.0.1:8000/rest/company/QWERTY/')
+        response = client.get('https://127.0.0.1:8000/rest/company/10/employees')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_company_get_employees(self):
         # company with employees
-        response = client.get('https://127.0.0.1:8000/rest/company/ASDFG/')
+        response = client.get('https://127.0.0.1:8000/rest/company/9/employees')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_company_not_available(self):
         # company not found
-        response = client.get('https://127.0.0.1:8000/rest/company/NOTAVAILABLE/')
+        response = client.get('https://127.0.0.1:8000/rest/company/23/employees')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
@@ -129,13 +129,13 @@ class CompanyPOSTAPITest(APITestCase):
         invalid_payload1 = [{"jibberish": 2, "company": "LINGOAGE"}, {"index": 5, "company": "GFDS"}]
         response = client.post('https://127.0.0.1:8000/rest/save_company', data=json.dumps(invalid_payload1),
                                content_type='application/json')
-        self.assertEqual(response.status_code, status.HTTP_409_CONFLICT)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         # payload with incorrect values
         invalid_payload2 = [{"index": "error", "company": "DHJHEUS"}, {"index": 54, "company": "ASGED"}]
         response = client.post('https://127.0.0.1:8000/rest/save_company', data=json.dumps(invalid_payload2),
                                content_type='application/json')
-        self.assertEqual(response.status_code, status.HTTP_409_CONFLICT)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         # payload with incorrect content type
         response = client.post('https://127.0.0.1:8000/rest/save_company', data=json.dumps(self.valid_payload1),
