@@ -26,7 +26,7 @@ class ModelClass(APIView):
                 serializer.save()
                 return Response({'status': 'Records added'}, status=status.HTTP_201_CREATED)
             except ValidationError as e:  # invalid data
-                return Response({'error': filter(None, e.detail)}, status=status.HTTP_409_CONFLICT)
+                return Response({'error': filter(None, e.detail)}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'status': 'Data not found'}, status=status.HTTP_204_NO_CONTENT)
 
     @staticmethod
