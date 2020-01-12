@@ -5,11 +5,11 @@ I assume that you have installed Python3.7 and MySQL already.
 
 ### Install pip
 - UBUNTU : `sudo apt install python-pip`
-- WINDOWS : Download [get-pip.py](https://bootstrap.pypa.io/get-pip.py) to a folder on your computer. 
-#### Open a command prompt window and navigate to the folder containing **get-pip.py**. 
-#### Then run 
-- `python get-pip.py `
-#### This will install pip.
+- WINDOWS : Download [get-pip.py](https://bootstrap.pypa.io/get-pip.py) to a folder on your computer.
+    - Open a command prompt window and navigate to the folder containing **get-pip.py**. 
+    - Then run 
+    - `python get-pip.py `
+    - This will install pip.
 #### To make sure **pip** is installed
 - `pip -V`
 
@@ -51,9 +51,16 @@ I assume that you have installed Python3.7 and MySQL already.
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'paranuara',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
+        'TEST': {
+            'CHARSET': 'utf8mb4',
+            'COLLATION': 'utf8mb4_unicode_ci',
+        },
         'HOST': 'localhost',
-        'USER': '',
-        'PASSWORD': '',
+        'USER': '',  # username
+        'PASSWORD': '',  # password
     }
 }``
 #### Change **USER** and **PASSWORD** field using your local instance user and password (in MySQL)
@@ -62,6 +69,13 @@ I assume that you have installed Python3.7 and MySQL already.
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'paranuara',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
+        'TEST': {
+            'CHARSET': 'utf8mb4',
+            'COLLATION': 'utf8mb4_unicode_ci',
+        },
         'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': '123',
@@ -69,7 +83,7 @@ I assume that you have installed Python3.7 and MySQL already.
 }``
 
 ### Apply migrations 
-- `python manage.py makemigrations`
+- `python manage.py makemigrations rest_api`
 - `python manage.py migrate`
 
 ### To run unit tests
@@ -82,3 +96,5 @@ I assume that you have installed Python3.7 and MySQL already.
 # Possible improvements : 
 As for the given json, most of users have themself as their friends. I didn't consider that. I can be my own friend ;).
 Add an authentication.
+
+
